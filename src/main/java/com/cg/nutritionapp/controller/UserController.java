@@ -24,7 +24,7 @@ import com.cg.nutritionapp.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = "https://nutritics-frontend.herokuapp.com")
 @RestController
 @RequestMapping("api/v1")
 //for front-end
@@ -35,8 +35,7 @@ public class UserController {
 	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
-	//listing users
-	@CrossOrigin(origins = "http://localhost:3000")  
+	//listing users 
 	@GetMapping("/user/listUsers")
 	public ResponseEntity<List<User>> listUsers(){
 		try {
@@ -49,8 +48,7 @@ public class UserController {
 		}
 	}
 	
-	//creatingUser
-	@CrossOrigin(origins = "http://localhost:3000")  
+	//creatingUser 
 	@PostMapping("/user/createUser")
 	public ResponseEntity<User> createUser(@RequestBody User user){
 	try {
@@ -66,7 +64,6 @@ public class UserController {
 
 
 	//Registering User
-	@CrossOrigin(origins = "http://localhost:3000")  
 	@PutMapping("/user/registerUser")
 	public ResponseEntity<User> registerUser(@RequestBody User user){
 		try {
@@ -81,8 +78,7 @@ public class UserController {
 		
 	}
 	
-	//UpdateProfile
-	@CrossOrigin(origins = "http://localhost:3000")  
+	//UpdateProfile  
 	@PutMapping("/user/updateProfile")
 	public ResponseEntity<User> profileUpdate(@RequestParam (name="id") Long id,@RequestBody User user){
 		try {
@@ -97,8 +93,7 @@ public class UserController {
 	}
 	
 
-	//activateOrBlockUser
-	@CrossOrigin(origins = "http://localhost:3000")  
+	//activateOrBlockUser 
 	@PutMapping("/user/activateOrBlockUser")
 	public ResponseEntity<Void> activateOrBlockUser(@RequestParam (name="id") Long id) {
 		try {
@@ -113,8 +108,7 @@ public class UserController {
 	}
 	
 	
-	//Auntenticating User
-	@CrossOrigin(origins = "http://localhost:3000")  
+	//Auntenticating User 
 	@GetMapping("/user/authenticateUser")
 	public ResponseEntity<User> authenticateUser(@RequestParam (name="loginid")String loginid,@RequestParam (name="password") String password){
 		try {
@@ -130,8 +124,7 @@ public class UserController {
 	}
 	
 	
-	//changing the Password
-	@CrossOrigin(origins = "http://localhost:3000")  
+	//changing the Password  
 	@PutMapping("/user/changePassword")
 	public ResponseEntity<Void>  changePassword(@RequestParam (name="id") Long id,@RequestParam (name="oldPassword")String oldPassword,@RequestParam (name="newPassword") String newPassword){
 		try {
@@ -147,8 +140,7 @@ public class UserController {
 	}	
 	
 	
-	@DeleteMapping("/user/removeUser")
-	@CrossOrigin(origins = "http://localhost:3000")  
+	@DeleteMapping("/user/removeUser")  
 	public ResponseEntity<Void> removeUser(@RequestParam (name="id") Long id,@RequestBody User user){
 		try {
 			userService.removeUser(user,id);
