@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.nutritionapp.model.WeightLog;
 import com.cg.nutritionapp.service.WeightLogService;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = "https://nutritics-frontend.herokuapp.com")
 @RestController
 @RequestMapping("/api/v1")
 public class WeightLogController {
