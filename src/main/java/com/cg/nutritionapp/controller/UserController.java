@@ -30,7 +30,7 @@ import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
+@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
 @RestController
 @RequestMapping("api/v1")
 //for front-end

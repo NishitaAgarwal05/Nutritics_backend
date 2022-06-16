@@ -25,7 +25,7 @@ import com.cg.nutritionapp.service.NutritionPlanService;
  * This class provides the controller for NutritionPlan module
  *
  */
-@CrossOrigin(origins ={"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
+@CrossOrigin(origins ={"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
 @RestController
 @RequestMapping("api/v1")
 public class NutritionPlanController {

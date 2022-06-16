@@ -33,7 +33,7 @@ public class PaymentController {
 	
 	private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
 
-	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
+	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
 	@GetMapping("/payment")
 	ResponseEntity<List<Payment>> showAllPayments(){
 		try{
@@ -46,7 +46,7 @@ public class PaymentController {
 		}
 	
 	}
-	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
+	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
 	@GetMapping("/payment/{id}")
 	ResponseEntity<Payment> getPaymentById(@PathVariable(value="id") Long id){
 		try {
@@ -59,7 +59,7 @@ public class PaymentController {
 		}
 	}
 	
-	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
+	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
 	@PostMapping("/payment/pay")
 	public ResponseEntity<Payment> pay(@Valid @RequestBody Payment payment){
 		try {
@@ -85,7 +85,7 @@ public class PaymentController {
 		}
 		
 	}
-	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
+	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
 	@PostMapping("/payment/addOffer")
 	public ResponseEntity<Void> addOffer(@RequestParam Double offerPrice){
 		try{
