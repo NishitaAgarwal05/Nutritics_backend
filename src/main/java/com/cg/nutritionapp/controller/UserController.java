@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,19 +20,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.nutritionapp.config.JwtTokenProvider;
 import com.cg.nutritionapp.exceptions.UserExceptions;
 import com.cg.nutritionapp.model.User;
 import com.cg.nutritionapp.service.UserService;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@CrossOrigin(origins = "https://nutritics-frontend.herokuapp.com")
+@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
 @RestController
 @RequestMapping("api/v1")
 //for front-end
 public class UserController {
-	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
+	@Autowired
+	private JwtTokenProvider tokenProvider;
+
 	@Autowired
 	private UserService userService;
 	
@@ -109,19 +120,31 @@ public class UserController {
 	
 	
 	//Auntenticating User 
-	@GetMapping("/user/authenticateUser")
-	public ResponseEntity<User> authenticateUser(@RequestParam (name="loginid")String loginid,@RequestParam (name="password") String password){
+	@PostMapping(value = "/user/authenticateUser", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> authenticate(@RequestBody User user) {
+		log.info("UserResourceImpl : authenticate");
+		JSONObject jsonObject = new JSONObject();
 		try {
-			userService.authenticateUser(loginid,password);
-			log.info("user authentication");
-			return new ResponseEntity<User>(HttpStatus.OK);
-			
-		}catch(UserExceptions ur) {
-			log.error("error in user authentication");
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			Authentication authentication = authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+			if (authentication.isAuthenticated()) {
+				String email = user.getEmail();
+				jsonObject.put("name", authentication.getName());
+				jsonObject.put("authorities", authentication.getAuthorities());
+				jsonObject.put("token", tokenProvider.createToken(email, userService.findByEmail(email).getRole()));
+				return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
+			}
+		} catch (JSONException e) {
+			try {
+				jsonObject.put("exception", e.getMessage());
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.UNAUTHORIZED);
 		}
-		
+		return null;
 	}
+	
 	
 	
 	//changing the Password  

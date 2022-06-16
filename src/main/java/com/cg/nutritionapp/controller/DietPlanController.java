@@ -21,7 +21,7 @@ import com.cg.nutritionapp.exceptions.DietPlanException;
 import com.cg.nutritionapp.model.DietPlan;
 import com.cg.nutritionapp.service.DietPlanService;
 
-@CrossOrigin(origins = "https://nutritics-frontend.herokuapp.com")
+@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
 @RestController
 @RequestMapping("api/v1")
 public class DietPlanController {

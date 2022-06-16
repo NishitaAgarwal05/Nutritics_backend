@@ -55,8 +55,9 @@ public class User {
 	/**
 	 * Role specifies whether a user is customer or a dietitian 
 	 */
-	@Column(name="role")
-	private String role;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private Role role;
 	/**
 	 * status defines if any user is active or blocked
 	 */
@@ -187,7 +188,7 @@ public class User {
 	 * @param password
 	 */
 	public User(Long userId, String userIdentification, String name, String contact, String gender, String dob, String photo,
-			String email, String role, String status, Double weight, Double height, Long diateryOrientation,
+			String email, Role role, String status, Double weight, Double height, Long diateryOrientation,
 			Double intensity, String goal, String workOutTime, String wakeUpTime, String sleepTime,
 			String medicalCondition, String allergicTo, String loginName, String password) {
 		super();
@@ -260,10 +261,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	public String getStatus() {

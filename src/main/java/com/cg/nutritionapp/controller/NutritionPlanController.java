@@ -2,8 +2,6 @@ package com.cg.nutritionapp.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ import com.cg.nutritionapp.service.NutritionPlanService;
  * This class provides the controller for NutritionPlan module
  *
  */
-@CrossOrigin(origins = "https://nutritics-frontend.herokuapp.com")
+@CrossOrigin(origins ={"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
 @RestController
 @RequestMapping("api/v1")
 public class NutritionPlanController {

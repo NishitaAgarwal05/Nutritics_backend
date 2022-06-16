@@ -2,11 +2,6 @@ package com.cg.nutritionapp.model;
 
 import javax.persistence.*;
 
-import com.cg.nutritionapp.exceptions.DietPlanException;
-
-import java.io.Serializable;
-import java.sql.Date;
-
 @Entity
 @Table(name = "DietPlan")
 public class DietPlan {

@@ -4,7 +4,8 @@ import com.cg.nutritionapp.model.User;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface UserDAO extends JpaRepository<User, Long>{
 	
@@ -15,6 +16,8 @@ public interface UserDAO extends JpaRepository<User, Long>{
 	 
 	 public User findByUserIdentification(String userIdentification); //to identify user
 	 
+	 @Query("FROM User WHERE email=:email")
+	User findByEmail(@Param("email") String email);
 	 
 	 public void delete(User user);
 }

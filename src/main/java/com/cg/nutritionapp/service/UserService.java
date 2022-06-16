@@ -34,4 +34,6 @@ public interface UserService{
 
 	public void removeUser(User user,Long id) throws UserExceptions;
 
+	public User findByEmail(String email);
+
 }
