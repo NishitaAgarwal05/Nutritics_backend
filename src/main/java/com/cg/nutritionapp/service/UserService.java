@@ -21,10 +21,10 @@ public interface UserService{
 	public List<User> listUsers() ;
 
 	//activate or Block User
-	public void activateOrBlockUser(Long id) throws UserExceptions;
+	// public void activateOrBlockUser(Long id) throws UserExceptions;
 
 	//Authenticate User
-	public User authenticateUser(String loginid, String password) throws UserExceptions;
+	// public User authenticateUser(String loginid, String password) throws UserExceptions;
 
 	//change Password
 	public void changePassword(Long id,String oldPassword, String newPassword) throws UserExceptions;

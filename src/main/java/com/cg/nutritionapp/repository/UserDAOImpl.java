@@ -37,16 +37,16 @@ public abstract class UserDAOImpl implements UserDAO{
 	        return listOfUsers;
 	    }
 	    
-	   public User findByUserIdentification(String userIdentification) {
+	//    public User findByUserIdentification(String userIdentification) {
 		   
-		   for(User ur:listOfUsers) {
-			   if(ur.getUserIdentification().equals(userIdentification)) {
-				   return ur;
-			   }
-		   }
-		   return null;
+	// 	   for(User ur:listOfUsers) {
+	// 		   if(ur.getUserIdentification().equals(userIdentification)) {
+	// 			   return ur;
+	// 		   }
+	// 	   }
+	// 	   return null;
 		   
-	   }
+	//    }
 	   
 	   public void delete(User user){
 	    	userDAO.delete(user);

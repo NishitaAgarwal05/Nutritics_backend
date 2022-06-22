@@ -140,19 +140,19 @@ public class UserController {
 	}
 	
 
-	//activateOrBlockUser 
-	@PutMapping("/user/activateOrBlockUser")
-	public ResponseEntity<Void> activateOrBlockUser(@RequestParam (name="id") Long id) {
-		try {
-			userService.activateOrBlockUser(id);
-			log.info("User block or active");
-			return new ResponseEntity<>(HttpStatus.OK);
+	// //activateOrBlockUser 
+	// @PutMapping("/user/activateOrBlockUser")
+	// public ResponseEntity<Void> activateOrBlockUser(@RequestParam (name="id") Long id) {
+	// 	try {
+	// 		userService.activateOrBlockUser(id);
+	// 		log.info("User block or active");
+	// 		return new ResponseEntity<>(HttpStatus.OK);
 			
-		}catch(UserExceptions ur) {
-			log.error("Error in activateOrBlock User");
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
+	// 	}catch(UserExceptions ur) {
+	// 		log.error("Error in activateOrBlock User");
+	// 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	// 	}
+	// }
 	
 	
 	
