@@ -25,6 +25,7 @@ import com.cg.nutritionapp.config.JwtTokenProvider;
 import com.cg.nutritionapp.exceptions.UserExceptions;
 import com.cg.nutritionapp.model.Role;
 import com.cg.nutritionapp.model.User;
+import com.cg.nutritionapp.service.RoleService;
 import com.cg.nutritionapp.service.UserService;
 import com.cg.nutritionapp.utils.ConstantUtils;
 
@@ -46,6 +47,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private RoleService roleService;
 	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
@@ -84,7 +88,7 @@ public class UserController {
 		JSONObject jsonObject = new JSONObject();
 		try {
 			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-			user.setRole(new Role(ConstantUtils.USER.toString()));
+			user.setRole( roleService.findByName( ConstantUtils.USER.toString()));
 			User savedUser = userService.createUser(user);
 			jsonObject.put("message", savedUser.getName());
 			return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);	
