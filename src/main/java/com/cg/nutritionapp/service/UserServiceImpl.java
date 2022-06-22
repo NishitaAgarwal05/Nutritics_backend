@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	//create User
 	@Override 
 	public User createUser(User user) throws UserExceptions{ 
-				userDAO.save(user);
+				userDAO.saveAndFlush(user);
 				return user;
 	}
 	
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 				// currentuser.setAllergicTo(user.getAllergicTo());
 				// currentuser.setLoginName(user.getLoginName());
 				currentuser.setPassword(user.getPassword());
-				 return userDAO.save(currentuser);
+				 return userDAO.saveAndFlush(currentuser);
 				 
 			}else {
 				throw new UserExceptions();
@@ -122,7 +122,7 @@ public class UserServiceImpl implements UserService {
 		for(User ur:users) {
 				if(ur.getPassword().equals(oldPassword)) {
 					ur.setPassword(newPassword);
-					userDAO.save(ur);
+					userDAO.saveAndFlush(ur);
 				}
 			}
 		}

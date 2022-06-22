@@ -55,7 +55,7 @@ public class User {
 	/**
 	 * Role specifies whether a user is customer or a dietitian 
 	 */
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "role_id")
 	private Role role;
 	/**
