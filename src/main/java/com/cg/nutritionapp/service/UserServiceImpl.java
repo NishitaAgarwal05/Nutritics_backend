@@ -31,22 +31,22 @@ public class UserServiceImpl implements UserService {
 			if(currentuser!=null) {
 				currentuser.setName(user.getName());
 				currentuser.setContact(user.getContact());
-				currentuser.setDob(user.getDob());
-				currentuser.setPhoto(user.getPhoto());
+				// currentuser.setDob(user.getDob());
+				// currentuser.setPhoto(user.getPhoto());
 				currentuser.setEmail(user.getEmail());
 				currentuser.setRole(user.getRole());
-				currentuser.setStatus(user.getStatus());
-				currentuser.setWeight(user.getWeight());
-				currentuser.setHeight(user.getHeight());
-				currentuser.setDiateryOrientation(user.getDiateryOrientation());
-				currentuser.setIntensity(user.getIntensity());
-				currentuser.setGoal(user.getGoal());
-				currentuser.setWorkOutTime(user.getWorkOutTime());
-				currentuser.setWakeUpTime(user.getWorkOutTime());
-				currentuser.setSleepTime(user.getSleepTime());
-				currentuser.setMedicalCondition(user.getMedicalCondition());
-				currentuser.setAllergicTo(user.getAllergicTo());
-				currentuser.setLoginName(user.getLoginName());
+				// currentuser.setStatus(user.getStatus());
+				// currentuser.setWeight(user.getWeight());
+				// currentuser.setHeight(user.getHeight());
+				// currentuser.setDiateryOrientation(user.getDiateryOrientation());
+				// currentuser.setIntensity(user.getIntensity());
+				// currentuser.setGoal(user.getGoal());
+				// currentuser.setWorkOutTime(user.getWorkOutTime());
+				// currentuser.setWakeUpTime(user.getWorkOutTime());
+				// currentuser.setSleepTime(user.getSleepTime());
+				// currentuser.setMedicalCondition(user.getMedicalCondition());
+				// currentuser.setAllergicTo(user.getAllergicTo());
+				// currentuser.setLoginName(user.getLoginName());
 				currentuser.setPassword(user.getPassword());
 				 return userDAO.save(currentuser);
 				 
@@ -64,49 +64,49 @@ public class UserServiceImpl implements UserService {
 		 return userDAO.findAll();
 	}
 	
-	//activate or Block User
-	@Override
-	public void activateOrBlockUser(Long id) throws UserExceptions{
+// 	//activate or Block User
+// 	@Override
+// 	public void activateOrBlockUser(Long id) throws UserExceptions{
 		
 		
-			User ur = userDAO.findById(id).orElse(null);
+// 			User ur = userDAO.findById(id).orElse(null);
 		
-			if(ur!=null) {
+// 			if(ur!=null) {
 		
-			if(ur.getStatus().equals("active")) {
-				ur.setStatus("Block");
-			}else {
-				ur.setStatus("active");
-			}
-			userDAO.save(ur);
-		 }else {
-			 throw new UserExceptions("No user id present");
+// 			if(ur.getStatus().equals("active")) {
+// 				ur.setStatus("Block");
+// 			}else {
+// 				ur.setStatus("active");
+// 			}
+// 			userDAO.save(ur);
+// 		 }else {
+// 			 throw new UserExceptions("No user id present");
 			
-		}
+// 		}
 	
 		
-  }
+//   }
 	
-	//AuthenticateUser 
-	public User authenticateUser(String loginid, String password) throws UserExceptions {
+	// //AuthenticateUser 
+	// public User authenticateUser(String loginid, String password) throws UserExceptions {
 		
-		User ur = userDAO.findByUserIdentification(loginid);
-			if(ur!=null) {
-				if(ur.getPassword().equals(password)) {
+	// 	User ur = userDAO.findByUserIdentification(loginid);
+	// 		if(ur!=null) {
+	// 			if(ur.getPassword().equals(password)) {
 					
-					return ur;
+	// 				return ur;
 					
 					
-				}else
-				{
-					throw new UserExceptions("Invalid user");
-				}
+	// 			}else
+	// 			{
+	// 				throw new UserExceptions("Invalid user");
+	// 			}
 				
-			}else {
-				throw new UserExceptions("User not present");
-			}
+	// 		}else {
+	// 			throw new UserExceptions("User not present");
+	// 		}
 			
-		}
+	// 	}
 	
 	//ChangePassword
 	public void changePassword(Long id,String oldPassword, String newPassword) throws UserExceptions {
