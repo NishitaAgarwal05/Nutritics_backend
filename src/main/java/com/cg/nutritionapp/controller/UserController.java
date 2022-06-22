@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.nutritionapp.config.JwtTokenProvider;
 import com.cg.nutritionapp.exceptions.UserExceptions;
+import com.cg.nutritionapp.model.Role;
 import com.cg.nutritionapp.model.User;
 import com.cg.nutritionapp.service.UserService;
+import com.cg.nutritionapp.utils.ConstantUtils;
 
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -75,18 +78,51 @@ public class UserController {
 
 
 	//Registering User
-	@PutMapping("/user/registerUser")
-	public ResponseEntity<User> registerUser(@RequestBody User user){
+	@PostMapping(value="/user/registerUser", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> registerUser(@RequestBody User user){
+		log.info("UserResourceImpl : register");
+		JSONObject jsonObject = new JSONObject();
 		try {
-			User registeruser = userService.registerUser(user);
-			log.info("User registered succesfully added");
-			return new ResponseEntity<>(registeruser,HttpStatus.CREATED);
-		}catch(UserExceptions u) {
-			log.error("error in registerUser");
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			
+			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+			user.setRole(new Role(ConstantUtils.USER.toString()));
+			User savedUser = userService.createUser(user);
+			jsonObject.put("message", savedUser.getName());
+			return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);	
 		}
-		
+		catch (JSONException e) {
+			try {
+				jsonObject.put("exception", e.getMessage());
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.UNAUTHORIZED);
+		}
+	}
+	
+	//Auntenticating User 
+	@PostMapping(value = "/user/authenticateUser", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> authenticate(@RequestBody User user) {
+		log.info("UserResourceImpl : authenticate");
+		JSONObject jsonObject = new JSONObject();
+		try {
+			Authentication authentication = authenticationManager
+					.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+			if (authentication.isAuthenticated()) {
+				String email = user.getEmail();
+				jsonObject.put("name", authentication.getName());
+				jsonObject.put("authorities", authentication.getAuthorities());
+				jsonObject.put("token", tokenProvider.createToken(email, userService.findByEmail(email).getRole()));
+				return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
+			}
+		} catch (JSONException e) {
+			try {
+				jsonObject.put("exception", e.getMessage());
+			} catch (JSONException e1) {
+				e1.printStackTrace();
+			}
+			return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.UNAUTHORIZED);
+		}
+		return null;
 	}
 	
 	//UpdateProfile  
@@ -116,33 +152,6 @@ public class UserController {
 			log.error("Error in activateOrBlock User");
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-	}
-	
-	
-	//Auntenticating User 
-	@PostMapping(value = "/user/authenticateUser", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> authenticate(@RequestBody User user) {
-		log.info("UserResourceImpl : authenticate");
-		JSONObject jsonObject = new JSONObject();
-		try {
-			Authentication authentication = authenticationManager
-					.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
-			if (authentication.isAuthenticated()) {
-				String email = user.getEmail();
-				jsonObject.put("name", authentication.getName());
-				jsonObject.put("authorities", authentication.getAuthorities());
-				jsonObject.put("token", tokenProvider.createToken(email, userService.findByEmail(email).getRole()));
-				return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
-			}
-		} catch (JSONException e) {
-			try {
-				jsonObject.put("exception", e.getMessage());
-			} catch (JSONException e1) {
-				e1.printStackTrace();
-			}
-			return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.UNAUTHORIZED);
-		}
-		return null;
 	}
 	
 	
@@ -176,9 +185,5 @@ public class UserController {
 		
 		
 	}
-	
-	
-	
-	
 
 }

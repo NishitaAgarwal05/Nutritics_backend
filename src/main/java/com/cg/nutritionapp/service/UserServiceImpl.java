@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
 	//create User
 	@Override 
 	public User createUser(User user) throws UserExceptions{ 
-		
 				userDAO.save(user);
 				return user;
 	}
@@ -64,14 +63,6 @@ public class UserServiceImpl implements UserService {
 	public List<User> listUsers(){
 		 return userDAO.findAll();
 	}
-	
-	//RegisterUser
-	@Override 
-	public User registerUser(User user)throws UserExceptions {
-		user = userDAO.save(user);
-		return user;
-	}
-	
 	
 	//activate or Block User
 	@Override

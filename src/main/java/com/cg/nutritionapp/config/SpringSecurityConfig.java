@@ -35,7 +35,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.cors();
 		http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.authorizeRequests().antMatchers("/api/v1/user/authenticateUser").permitAll().anyRequest().authenticated();
+				.authorizeRequests().antMatchers("/api/v1/user/*").permitAll().anyRequest().authenticated();
 
 				http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authorizeRequests().antMatchers("/api/v1/nutritionPlan/*").permitAll().anyRequest().authenticated();

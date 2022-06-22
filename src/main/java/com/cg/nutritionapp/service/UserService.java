@@ -20,9 +20,6 @@ public interface UserService{
 	//list Users
 	public List<User> listUsers() ;
 
-	//User register
-	public User registerUser(User user)  throws UserExceptions;
-
 	//activate or Block User
 	public void activateOrBlockUser(Long id) throws UserExceptions;
 
