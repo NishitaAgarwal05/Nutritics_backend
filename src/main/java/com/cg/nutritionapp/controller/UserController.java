@@ -144,9 +144,8 @@ public class UserController {
 	}
 	
 	//UpdateProfile  
-	@PutMapping("/user/updateProfile")
-	
-	public ResponseEntity<User> profileUpdate(@RequestParam (name="id") Long id,@RequestBody User user){
+	@PutMapping("/user/updateProfile/{id}")
+	public ResponseEntity<User> profileUpdate(@PathVariable Long id,@RequestBody User user){
 		try {
 			userService.profileUpdate(user,id);
 			log.info("User profile succesfully added");
