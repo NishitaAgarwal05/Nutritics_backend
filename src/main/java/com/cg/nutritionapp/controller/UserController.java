@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,6 +67,18 @@ public class UserController {
 			
 		}
 	}
+
+	@GetMapping("/user/getUser/{email}")
+    ResponseEntity<User> getPlan(@PathVariable String email ){
+    	 try{
+         	User user = userService.findByEmail(email);
+         	 log.info("User with email = " + email + " displayed successfully!");
+         	return new ResponseEntity<>(user,HttpStatus.OK);	
+         }catch(UserExceptions e) {
+         	log.error("Error Found:-->"+e);
+         	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);	
+         }
+    }
 	
 	//creatingUser 
 	@PostMapping("/user/createUser")
@@ -116,7 +130,6 @@ public class UserController {
 				jsonObject.put("name", authentication.getName());
 				jsonObject.put("authorities", authentication.getAuthorities());
 				jsonObject.put("token", tokenProvider.createToken(email, userService.findByEmail(email).getRole()));
-				jsonObject.put("userId", user.getUserId());
 				return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
 			}
 		} catch (JSONException e) {
