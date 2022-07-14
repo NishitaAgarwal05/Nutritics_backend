@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
 				currentuser.setDob(user.getDob());
 				// currentuser.setPhoto(user.getPhoto());
 				currentuser.setEmail(user.getEmail());
-				currentuser.setRole(user.getRole());
 				currentuser.setStatus(user.getStatus());
 				currentuser.setWeight(user.getWeight());
 				currentuser.setHeight(user.getHeight());
