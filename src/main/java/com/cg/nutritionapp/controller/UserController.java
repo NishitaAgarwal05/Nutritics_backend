@@ -116,6 +116,7 @@ public class UserController {
 				jsonObject.put("name", authentication.getName());
 				jsonObject.put("authorities", authentication.getAuthorities());
 				jsonObject.put("token", tokenProvider.createToken(email, userService.findByEmail(email).getRole()));
+				jsonObject.put("userId", user.getUserId());
 				return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
 			}
 		} catch (JSONException e) {
