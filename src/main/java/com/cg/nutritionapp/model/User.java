@@ -35,13 +35,13 @@ public class User {
 	/**
 	 * gender is of type String and stores gender value
 	 */
-	// @Column(name="gender")
-	// private String gender;
+	@Column(name="gender")
+	private String gender;
 	/**
 	 * dob is Date of Birth and is of type String
 	 */
-	// @Column(name="dob")
-	// private String dob;
+	@Column(name="dob")
+	private String dob;
 	/**
 	 * photo is used to store filename of with jpg/png extension
 	 */
@@ -61,14 +61,14 @@ public class User {
 	/**
 	 * status defines if any user is active or blocked
 	 */
-	// @Column(name="status")
-	// private String status;
+	@Column(name="status")
+	private String status;
 	/**
 	 * weight is of type double and store weight of user
 	 */
 	
-	// @Column(name="weight")
-	// private Double weight;
+	@Column(name="weight")
+	private Double weight;
 
 	/**
 	 * weightLogList is the list of weight logs of a specific user
@@ -87,8 +87,8 @@ public class User {
 	/**
 	 * nutritionPlan defines how the nutrition plan of the specific users is
 	 */
-	// @OneToOne(mappedBy = "user")
-	// private NutritionPlan nutritionPlan;
+	@OneToOne(mappedBy = "user")
+	private NutritionPlan nutritionPlan;
 	
 	// @OneToOne(mappedBy = "user")
 	// private  DietPlan dietPlan;
@@ -96,8 +96,8 @@ public class User {
 	/**
 	 * height is also of type double and stores height
 	 */
-	// @Column(name="height")
-	// private Double height;
+	@Column(name="height")
+	private Double height;
 
 	/**
 	 * diateryOrientation defines how the diet plan of the specific users is
@@ -109,38 +109,38 @@ public class User {
 	 */
 	
 	
-	// @Column(name="intensity")
-	// private Double intensity;
+	@Column(name="intensity")
+	private Double intensity;
 	/**
 	 * goal defines the specific goal set by user or dietitian 
 	 */
-	// @Column(name="goal")
-	// private String goal;
+	@Column(name="goal")
+	private String goal;
 	/**
 	 * number of hours a person can workout
 	 */
-	// @Column(name="work_out_time")
-	// private String workOutTime;
+	@Column(name="work_out_time")
+	private String workOutTime;
 	/**
 	 * time by which user wakes up
 	 */
-	// @Column(name="wake_up_time")
-	// private String wakeUpTime;
+	@Column(name="wake_up_time")
+	private String wakeUpTime;
 	/**
 	 * time by which user goes to sleep
 	 */
-	// @Column(name="sleep_time")
-	// private String sleepTime;
+	@Column(name="sleep_time")
+	private String sleepTime;
 	/**
 	 * medical condition defines if a user is having any medical conditions or not
 	 */
-	// @Column(name="medical_condition")
-	// private String medicalCondition;
+	@Column(name="medical_condition")
+	private String medicalCondition;
 	/**
 	 * this is a String type stores value if a person is allergic to something
 	 */
-	// @Column(name="allergic_to")
-	// private String allergicTo;
+	@Column(name="allergic_to")
+	private String allergicTo;
 	/**
 	 * loginNmae is the login name specified by user
 	 */
@@ -152,8 +152,8 @@ public class User {
 	@Column(name="password",unique=true)
 	private String password;
 	
-	// @Column(name="diateryOrientation")
-	// private Long diateryOrientation;
+	@Column(name="diateryOrientation")
+	private Long diateryOrientation;
 
 
 	/**
@@ -187,30 +187,30 @@ public class User {
 	 * @param loginName
 	 * @param password
 	 */
-	public User(/*Long userId, String userIdentification,*/ String name, String contact, /*String gender, String dob, String photo,
-			*/String email, Role role,/* String status, Double weight, Double height, Long diateryOrientation,
+	public User(/*Long userId, String userIdentification,*/ String name, String contact, String gender, String dob, /*String photo,*/
+			String email, Role role, String status, Double weight, Double height, Long diateryOrientation,
 			Double intensity, String goal, String workOutTime, String wakeUpTime, String sleepTime,
-			String medicalCondition, String allergicTo, String loginName,*/ String password) {
+			String medicalCondition, String allergicTo, /*String loginName,*/ String password) {
 		super();
 		// this.userIdentification = userIdentification;
 		this.name = name;
 		this.contact = contact;
-		// this.gender = gender;
-		// this.dob = dob;
+		this.gender = gender;
+		this.dob = dob;
 		// this.photo = photo;
 		this.email = email;
 		this.role = role;
-		// this.status = status;
-		// this.weight = weight;
-		// this.height = height;
-		// this.diateryOrientation = diateryOrientation;
-		// this.intensity = intensity;
-		// this.goal = goal;
-		// this.workOutTime = workOutTime;
-		// this.wakeUpTime = wakeUpTime;
-		// this.sleepTime = sleepTime;
-		// this.medicalCondition = medicalCondition;
-		// this.allergicTo = allergicTo;
+		this.status = status;
+		this.weight = weight;
+		this.height = height;
+		this.diateryOrientation = diateryOrientation;
+		this.intensity = intensity;
+		this.goal = goal;
+		this.workOutTime = workOutTime;
+		this.wakeUpTime = wakeUpTime;
+		this.sleepTime = sleepTime;
+		this.medicalCondition = medicalCondition;
+		this.allergicTo = allergicTo;
 		// this.loginName = loginName;
 		this.password = password;
 	}
@@ -237,18 +237,18 @@ public class User {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	// public String getGender() {
-	// 	return gender;
-	// }
-	// public void setGender(String gender) {
-	// 	this.gender = gender;
-	// }
-	// public String getDob() {
-	// 	return dob;
-	// }
-	// public void setDob(String dob) {
-	// 	this.dob = dob;
-	// }
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
 	// public String getPhoto() {
 	// 	return photo;
 	// }
@@ -267,72 +267,72 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	// public String getStatus() {
-	// 	return status;
-	// }
-	// public void setStatus(String status) {
-	// 	this.status = status;
-	// }
-	// public Double getWeight() {
-	// 	return weight;
-	// }
-	// public void setWeight(Double weight) {
-	// 	this.weight = weight;
-	// }
-	// public Double getHeight() {
-	// 	return height;
-	// }
-	// public void setHeight(Double height) {
-	// 	this.height = height;
-	// }
-	// public Long getDiateryOrientation() {
-	// 	return diateryOrientation;
-	// }
-	// public void setDiateryOrientation(Long diateryOrientation) {
-	// 	this.diateryOrientation = diateryOrientation;
-	// }
-	// public Double getIntensity() {
-	// 	return intensity;
-	// }
-	// public void setIntensity(Double intensity) {
-	// 	this.intensity = intensity;
-	// }
-	// public String getGoal() {
-	// 	return goal;
-	// }
-	// public void setGoal(String goal) {
-	// 	this.goal = goal;
-	// }
-	// public String getWorkOutTime() {
-	// 	return workOutTime;
-	// }
-	// public void setWorkOutTime(String workOutTime) {
-	// 	this.workOutTime = workOutTime;
-	// }
-	// public String getWakeUpTime() {
-	// 	return wakeUpTime;
-	// }
-	// public void setWakeUpTime(String wakeUpTime) {
-	// 	this.wakeUpTime = wakeUpTime;
-	// }
-	// public String getSleepTime() {
-	// 	return sleepTime;
-	// }
-	// public void setSleepTime(String sleepTime) {
-	// 	this.sleepTime = sleepTime;
-	// }
-	// public String getMedicalCondition() {
-	// 	return medicalCondition;
-	// }
-	// public void setMedicalCondition(String medicalCondition) {
-	// 	this.medicalCondition = medicalCondition;
-	// }
-	// public String getAllergicTo() {
-	// 	return allergicTo;
-	// }
-	// public void setAllergicTo(String allergicTo) {
-	// 	this.allergicTo = allergicTo;
-	// }
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Double getWeight() {
+		return weight;
+	}
+	public void setWeight(Double weight) {
+		this.weight = weight;
+	}
+	public Double getHeight() {
+		return height;
+	}
+	public void setHeight(Double height) {
+		this.height = height;
+	}
+	public Long getDiateryOrientation() {
+		return diateryOrientation;
+	}
+	public void setDiateryOrientation(Long diateryOrientation) {
+		this.diateryOrientation = diateryOrientation;
+	}
+	public Double getIntensity() {
+		return intensity;
+	}
+	public void setIntensity(Double intensity) {
+		this.intensity = intensity;
+	}
+	public String getGoal() {
+		return goal;
+	}
+	public void setGoal(String goal) {
+		this.goal = goal;
+	}
+	public String getWorkOutTime() {
+		return workOutTime;
+	}
+	public void setWorkOutTime(String workOutTime) {
+		this.workOutTime = workOutTime;
+	}
+	public String getWakeUpTime() {
+		return wakeUpTime;
+	}
+	public void setWakeUpTime(String wakeUpTime) {
+		this.wakeUpTime = wakeUpTime;
+	}
+	public String getSleepTime() {
+		return sleepTime;
+	}
+	public void setSleepTime(String sleepTime) {
+		this.sleepTime = sleepTime;
+	}
+	public String getMedicalCondition() {
+		return medicalCondition;
+	}
+	public void setMedicalCondition(String medicalCondition) {
+		this.medicalCondition = medicalCondition;
+	}
+	public String getAllergicTo() {
+		return allergicTo;
+	}
+	public void setAllergicTo(String allergicTo) {
+		this.allergicTo = allergicTo;
+	}
 	// public String getLoginName() {
 	// 	return loginName;
 	// }

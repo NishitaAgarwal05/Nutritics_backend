@@ -31,21 +31,21 @@ public class UserServiceImpl implements UserService {
 			if(currentuser!=null) {
 				currentuser.setName(user.getName());
 				currentuser.setContact(user.getContact());
-				// currentuser.setDob(user.getDob());
+				currentuser.setDob(user.getDob());
 				// currentuser.setPhoto(user.getPhoto());
 				currentuser.setEmail(user.getEmail());
 				currentuser.setRole(user.getRole());
-				// currentuser.setStatus(user.getStatus());
-				// currentuser.setWeight(user.getWeight());
-				// currentuser.setHeight(user.getHeight());
-				// currentuser.setDiateryOrientation(user.getDiateryOrientation());
-				// currentuser.setIntensity(user.getIntensity());
-				// currentuser.setGoal(user.getGoal());
-				// currentuser.setWorkOutTime(user.getWorkOutTime());
-				// currentuser.setWakeUpTime(user.getWorkOutTime());
-				// currentuser.setSleepTime(user.getSleepTime());
-				// currentuser.setMedicalCondition(user.getMedicalCondition());
-				// currentuser.setAllergicTo(user.getAllergicTo());
+				currentuser.setStatus(user.getStatus());
+				currentuser.setWeight(user.getWeight());
+				currentuser.setHeight(user.getHeight());
+				currentuser.setDiateryOrientation(user.getDiateryOrientation());
+				currentuser.setIntensity(user.getIntensity());
+				currentuser.setGoal(user.getGoal());
+				currentuser.setWorkOutTime(user.getWorkOutTime());
+				currentuser.setWakeUpTime(user.getWorkOutTime());
+				currentuser.setSleepTime(user.getSleepTime());
+				currentuser.setMedicalCondition(user.getMedicalCondition());
+				currentuser.setAllergicTo(user.getAllergicTo());
 				// currentuser.setLoginName(user.getLoginName());
 				currentuser.setPassword(user.getPassword());
 				 return userDAO.saveAndFlush(currentuser);
@@ -87,26 +87,7 @@ public class UserServiceImpl implements UserService {
 		
 //   }
 	
-	// //AuthenticateUser 
-	// public User authenticateUser(String loginid, String password) throws UserExceptions {
-		
-	// 	User ur = userDAO.findByUserIdentification(loginid);
-	// 		if(ur!=null) {
-	// 			if(ur.getPassword().equals(password)) {
-					
-	// 				return ur;
-					
-					
-	// 			}else
-	// 			{
-	// 				throw new UserExceptions("Invalid user");
-	// 			}
-				
-	// 		}else {
-	// 			throw new UserExceptions("User not present");
-	// 		}
-			
-	// 	}
+	
 	
 	//ChangePassword
 	public void changePassword(Long id,String oldPassword, String newPassword) throws UserExceptions {
