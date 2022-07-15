@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cg.nutritionapp.repository.UserDAO;
@@ -52,9 +53,6 @@ public class UserServiceImpl implements UserService {
 			}else {
 				throw new UserExceptions();
 			}
-		
-				 
-				
 	}
 	
 	//List Users
@@ -90,23 +88,13 @@ public class UserServiceImpl implements UserService {
 	
 	//ChangePassword
 	public void changePassword(Long id,String oldPassword, String newPassword) throws UserExceptions {
-		
-		if(oldPassword.equals(newPassword)) {
-			throw new UserExceptions("The old password and new password are same");
-			
+		User user = userDAO.findById(id).orElse(null);
+		if(new BCryptPasswordEncoder().matches(oldPassword, user.getPassword())) {
+			user.setPassword(new BCryptPasswordEncoder().encode(newPassword));
+			userDAO.saveAndFlush(user);
 		}else {
-			
-		
-		List<User> users = userDAO.findAll();
-		
-		for(User ur:users) {
-				if(ur.getPassword().equals(oldPassword)) {
-					ur.setPassword(newPassword);
-					userDAO.saveAndFlush(ur);
-				}
-			}
-		}
-			
+			throw new UserExceptions("Wrong old Password");
+		}	
 	}
 	
 	@Override

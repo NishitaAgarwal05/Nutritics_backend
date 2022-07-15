@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -175,13 +174,12 @@ public class UserController {
 	
 	
 	//changing the Password  
-	@PutMapping("/user/changePassword")
-	public ResponseEntity<Void>  changePassword(@RequestParam (name="id") Long id,@RequestParam (name="oldPassword")String oldPassword,@RequestParam (name="newPassword") String newPassword){
+	@PutMapping("/user/changePassword/{id}")
+	public ResponseEntity<Void>  changePassword(@PathVariable Long id,@RequestParam (name="oldPassword")String oldPassword,@RequestParam (name="newPassword") String newPassword){
 		try {
 			userService.changePassword(id,oldPassword,newPassword);
-			log.info("change user password");
+			log.info("Changed user password");
 			return new ResponseEntity<>(HttpStatus.OK);
-			
 		}catch(UserExceptions ur) {
 			log.error("Error in changePassword");
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
