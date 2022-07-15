@@ -79,21 +79,6 @@ public class UserController {
          }
     }
 	
-	//creatingUser 
-	@PostMapping("/user/createUser")
-	public ResponseEntity<User> createUser(@RequestBody User user){
-	try {
-		User newuser= userService.createUser(user);
-		log.info("User succesfully added");
-		return new ResponseEntity<>(newuser,HttpStatus.CREATED);
-	} catch(UserExceptions u) {
-			log.error("User is not created successfully");
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			
-	}
-}	
-
-
 	//Registering User
 	@PostMapping(value="/user/registerUser", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> registerUser(@RequestBody User user){
@@ -156,22 +141,19 @@ public class UserController {
 		
 	}
 	
-
-	// //activateOrBlockUser 
-	// @PutMapping("/user/activateOrBlockUser")
-	// public ResponseEntity<Void> activateOrBlockUser(@RequestParam (name="id") Long id) {
-	// 	try {
-	// 		userService.activateOrBlockUser(id);
-	// 		log.info("User block or active");
-	// 		return new ResponseEntity<>(HttpStatus.OK);
+	//activateOrBlockUser 
+	@PutMapping("/user/activateOrBlockUser/{id}")
+	public ResponseEntity<Void> activateOrBlockUser(@PathVariable Long id) {
+		try {
+			userService.activateOrBlockUser(id);
+			log.info("User block or active");
+			return new ResponseEntity<>(HttpStatus.OK);
 			
-	// 	}catch(UserExceptions ur) {
-	// 		log.error("Error in activateOrBlock User");
-	// 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	// 	}
-	// }
-	
-	
+		}catch(UserExceptions ur) {
+			log.error("Error in activateOrBlock User");
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	//changing the Password  
 	@PutMapping("/user/changePassword/{id}")
@@ -186,20 +168,5 @@ public class UserController {
 		}
 		
 	}	
-	
-	
-	@DeleteMapping("/user/removeUser")  
-	public ResponseEntity<Void> removeUser(@RequestParam (name="id") Long id,@RequestBody User user){
-		try {
-			userService.removeUser(user,id);
-			log.info("User deleted successfully");
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		}catch(UserExceptions u) {
-			log.error("Error Found:-->"+u);
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-		}
-		
-		
-	}
 
 }

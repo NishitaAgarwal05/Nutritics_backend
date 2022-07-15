@@ -61,30 +61,21 @@ public class UserServiceImpl implements UserService {
 		 return userDAO.findAll();
 	}
 	
-// 	//activate or Block User
-// 	@Override
-// 	public void activateOrBlockUser(Long id) throws UserExceptions{
-		
-		
-// 			User ur = userDAO.findById(id).orElse(null);
-		
-// 			if(ur!=null) {
-		
-// 			if(ur.getStatus().equals("active")) {
-// 				ur.setStatus("Block");
-// 			}else {
-// 				ur.setStatus("active");
-// 			}
-// 			userDAO.save(ur);
-// 		 }else {
-// 			 throw new UserExceptions("No user id present");
-			
-// 		}
-	
-		
-//   }
-	
-	
+	//activate or Block User
+	@Override
+	public void activateOrBlockUser(Long id) throws UserExceptions{
+		User ur = userDAO.findById(id).orElse(null);
+		if(ur!=null) {
+			if(ur.getStatus().equalsIgnoreCase("active")) {
+				ur.setStatus("block");
+			}else {
+				ur.setStatus("active");
+			}
+			userDAO.saveAndFlush(ur);
+		 }else {
+			 throw new UserExceptions("No user id present");
+		}
+  }
 	
 	//ChangePassword
 	public void changePassword(Long id,String oldPassword, String newPassword) throws UserExceptions {
@@ -97,21 +88,6 @@ public class UserServiceImpl implements UserService {
 		}	
 	}
 	
-	@Override
-	public void removeUser(User user,Long id) throws UserExceptions{
-		try {
-			User currentUser = (userDAO.findById(id)).orElse(null);
-			if(currentUser!=null) {
-				userDAO.delete(currentUser);
-			} else {
-				throw new UserExceptions("No such matching user exists! ");
-			} 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-
 	@Override
 	public User findByEmail(String email){
 		return userDAO.findByEmail(email);
