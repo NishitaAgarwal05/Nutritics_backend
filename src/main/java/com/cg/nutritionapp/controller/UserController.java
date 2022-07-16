@@ -79,6 +79,7 @@ public class UserController {
          }
     }
 	
+
 	//Registering User
 	@PostMapping(value="/user/registerUser", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> registerUser(@RequestBody User user){
