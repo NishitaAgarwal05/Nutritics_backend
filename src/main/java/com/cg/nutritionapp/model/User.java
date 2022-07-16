@@ -74,7 +74,7 @@ public class User {
 	 * weightLogList is the list of weight logs of a specific user
 	 */
 
-	// @OneToMany(mappedBy="user")
+	// @OneToMany(mappedBy="user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	// private List<WeightLog> weightLogList;
 
 	/**
@@ -90,8 +90,8 @@ public class User {
 	@OneToOne(mappedBy = "user")
 	private NutritionPlan nutritionPlan;
 	
-	// @OneToOne(mappedBy = "user")
-	// private  DietPlan dietPlan;
+	@OneToOne(mappedBy = "user")
+	private  DietPlan dietPlan;
 
 	/**
 	 * height is also of type double and stores height
