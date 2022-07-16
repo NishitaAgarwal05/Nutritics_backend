@@ -38,7 +38,7 @@ public class DietPlanServiceImpl implements DietPlanService{
 
         if(isValid(dietPlan)) {
             if(dietPlan.getCarbsRatio() + dietPlan.getFatRatio() + dietPlan.getProteinRatio() == 1) {
-                dietPlan = dietPlanDAO.save(dietPlan);
+                dietPlan = dietPlanDAO.saveAndFlush(dietPlan);
                 return dietPlan;
             } else {
                 throw new DietPlanException("Sum of Carbs Ratio, Fat Ratio and Protein Ratio should be exactly 1!");
@@ -60,6 +60,16 @@ public class DietPlanServiceImpl implements DietPlanService{
     public List<DietPlan> listAllPlans() throws DietPlanException {
         return dietPlanDAO.findAll();
     }
+
+    @Override
+	public DietPlan getPlanWithId(Long id){
+		DietPlan nutritionPlan = dietPlanDAO.findById(id).orElse(null);
+		if(nutritionPlan == null) {
+			throw new DietPlanException("This id doesn't exist!!!!");
+		} 
+		return nutritionPlan;
+		
+	}
 
     @Override
     public void removeDietPlan(DietPlan dietPlan) throws DietPlanException{

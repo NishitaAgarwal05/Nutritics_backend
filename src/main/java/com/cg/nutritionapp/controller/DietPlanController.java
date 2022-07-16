@@ -49,6 +49,18 @@ public class DietPlanController {
 
     }
 
+    @GetMapping("/dietPlan/getPlan/{id}")
+    ResponseEntity<DietPlan> getPlan(@PathVariable Long id){
+    	 try{
+         	DietPlan plan =dietPlanService.getPlanWithId(id);
+         	 log.info("Diet Plan with id = " + id + " displayed successfully!");
+         	return new ResponseEntity<>(plan,HttpStatus.OK);	
+         }catch(DietPlanException e) {
+         	log.error("Error Found:-->"+e);
+         	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);	
+         }
+    }
+
 
     @PostMapping("/dietPlan/createDietPlan")
     public ResponseEntity<DietPlan> createDietPlan(@RequestBody DietPlan dietPlan){
