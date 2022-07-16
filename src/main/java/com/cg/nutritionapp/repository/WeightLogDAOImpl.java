@@ -13,39 +13,5 @@ import com.cg.nutritionapp.model.WeightLog;
 
 @Repository
 public abstract class WeightLogDAOImpl implements WeightLogDAO {
-	
-	private List<WeightLog> weightLogList = new ArrayList<>();
-	
-	@Autowired
-	private WeightLogDAO weightLogDAO;
-
-	public WeightLogDAOImpl() {
-		weightLogList=weightLogDAO.findAll();
-	}
-
-
-
-	@Override
-	public WeightLog save(WeightLog weightLog) {
-		weightLogList.add(weightLog);
-		return weightLog;
-	}
-
-	/**
-	 * This method is responsible for displaying the data to the user.
-	 */
-	@Override
-	public List<WeightLog> findAll() {
-		return  weightLogList;
-	}
-
-	/*
-	 * User can Delete his/her weightLog here.
-	 */
-	@Override
-	public void delete(WeightLog weightLog){
-		weightLogDAO.deleteById(weightLog.getId());
-
-	}
 }
 

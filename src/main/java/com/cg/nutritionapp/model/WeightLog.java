@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="WeightLog")
-public class WeightLog implements Serializable {
+public class WeightLog {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long id;
@@ -35,7 +35,7 @@ public class WeightLog implements Serializable {
 	 */
 
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne()
 	@JoinColumn(name="user_id")
 	private User user;
 	/**

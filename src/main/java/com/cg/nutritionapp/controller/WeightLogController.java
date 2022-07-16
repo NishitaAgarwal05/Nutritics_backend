@@ -45,10 +45,10 @@ public class WeightLogController {
 	}
 	
 	@GetMapping("/weightLog/showWeightLog/{id}")
-	public ResponseEntity<WeightLog> findWeightLogById(@PathVariable("id") Long id) {
+	public ResponseEntity<List<WeightLog>> findWeightLogById(@PathVariable("id") Long id) {
 		try {
-		WeightLog weightLog= weightLogService.findWeightLog(id);
-		return new ResponseEntity<>(weightLog, HttpStatus.CREATED);
+			List<WeightLog> weightLogList= weightLogService.findWeightLog(id);
+		return new ResponseEntity<>(weightLogList, HttpStatus.CREATED);
 		} catch(WeightLogException e) {
 			log.error("Error Found:-->"+e);
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

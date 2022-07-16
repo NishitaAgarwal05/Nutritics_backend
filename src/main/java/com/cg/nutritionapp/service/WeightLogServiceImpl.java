@@ -1,6 +1,7 @@
 package com.cg.nutritionapp.service;
 
 import java.util.List;
+import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -94,13 +95,15 @@ public class WeightLogServiceImpl implements WeightLogService{
 
 
 	@Override
-	public WeightLog findWeightLog(Long id) throws WeightLogException{
-		WeightLog existingWeightLog=weightLogDAO.findById(id).orElse(null);
-		if(existingWeightLog!=null) {
-			return existingWeightLog;
-		} else {
-			throw new WeightLogException("No matching weight log!");
+	public List<WeightLog> findWeightLog(Long id) throws WeightLogException{
+		List<WeightLog> weightLogList=weightLogDAO.findAll();
+		List<WeightLog> weightLogOfUser=new ArrayList<WeightLog>();
+		for(WeightLog w: weightLogList){
+			if(w.getUser().getUserId()==id){
+				weightLogOfUser.add(w);
+			}
 		}
+		return weightLogOfUser;
 	}
 }
 

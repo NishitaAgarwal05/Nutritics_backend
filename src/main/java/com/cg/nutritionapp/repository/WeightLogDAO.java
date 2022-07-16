@@ -14,11 +14,11 @@ public interface WeightLogDAO extends JpaRepository<WeightLog,Long> {
 	/**
 	 *  To save all the value to weightlog.
 	 */
-	WeightLog save(WeightLog weightLog);
+	public WeightLog save(WeightLog weightLog);
 	/**
 	 *   To display the values in weightlog.
 	 */
-	List<WeightLog> findAll()  ;
+	public List<WeightLog> findAll()  ;
 	/**
 	 * 	To update values for weightLog.
 	 */
@@ -26,7 +26,7 @@ public interface WeightLogDAO extends JpaRepository<WeightLog,Long> {
 	 *
 	 * To delete your weight log.
 	 */
-	void delete(WeightLog weightLog) ;
+	public void delete(WeightLog weightLog) ;
 
 }
 
