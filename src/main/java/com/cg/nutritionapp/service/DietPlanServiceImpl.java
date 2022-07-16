@@ -72,11 +72,11 @@ public class DietPlanServiceImpl implements DietPlanService{
 	}
 
     @Override
-    public void removeDietPlan(DietPlan dietPlan) throws DietPlanException{
+    public void removeDietPlan(Long id) throws DietPlanException{
         try {
-            DietPlan existingPlan = (dietPlanDAO.findById(dietPlan.getId())).orElse(null);
-            if(existingPlan!=null) {
-                dietPlanDAO.delete(dietPlan);
+            DietPlan plan = (dietPlanDAO.findById(id)).orElse(null);
+            if(plan!=null) {
+                dietPlanDAO.delete(plan);
             } else {
                 throw new DietPlanException("No such matching Diet Plan exists! ");
             }

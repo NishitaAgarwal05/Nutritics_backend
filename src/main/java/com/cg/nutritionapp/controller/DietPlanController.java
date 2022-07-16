@@ -92,10 +92,10 @@ public class DietPlanController {
     }
 
     @DeleteMapping("/dietPlan/removeDietPlan/{id}")
-    public ResponseEntity<Void> removeDietPlan(@PathVariable Long id, @RequestBody DietPlan dietPlan){
+    public ResponseEntity<Void> removeDietPlan(@PathVariable Long id){
 
         try {
-            dietPlanService.removeDietPlan(dietPlan);
+            dietPlanService.removeDietPlan(id);
             log.info("Diet Plan deleted successfully!");
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (DietPlanException e) {

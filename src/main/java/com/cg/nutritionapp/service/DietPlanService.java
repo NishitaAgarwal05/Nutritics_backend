@@ -10,6 +10,6 @@ public interface DietPlanService {
     public DietPlan createDietPlan(DietPlan dietPlan) throws DietPlanException;
     public List<DietPlan> listAllPlans() throws DietPlanException;
     public DietPlan getPlanWithId(Long id) throws DietPlanException;
-    public void removeDietPlan(DietPlan dietPlan) throws DietPlanException;
+    public void removeDietPlan(Long id) throws DietPlanException;
     public DietPlan changeDietPlan(DietPlan dietPlan) throws DietPlanException;
 }
