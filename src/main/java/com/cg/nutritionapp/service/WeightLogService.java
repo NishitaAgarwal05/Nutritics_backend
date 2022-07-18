@@ -11,6 +11,7 @@ public interface WeightLogService {
 	public WeightLog updateWeightLog(Long id,WeightLog weightLog) throws WeightLogException;
 	public void removeWeightLog(Long id) throws WeightLogException;
 	public List<WeightLog> showAllWeightLog();
-	public List<WeightLog> findWeightLog(Long id);
+	public List<WeightLog> findWeightLogByUserId(Long id);
+	public WeightLog findWeightLog(Long id) throws WeightLogException;
 
 }

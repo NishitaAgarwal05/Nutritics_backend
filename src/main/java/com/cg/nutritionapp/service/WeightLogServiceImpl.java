@@ -95,7 +95,7 @@ public class WeightLogServiceImpl implements WeightLogService{
 
 
 	@Override
-	public List<WeightLog> findWeightLog(Long id) throws WeightLogException{
+	public List<WeightLog> findWeightLogByUserId(Long id) throws WeightLogException{
 		List<WeightLog> weightLogList=weightLogDAO.findAll();
 		List<WeightLog> weightLogOfUser=new ArrayList<WeightLog>();
 		for(WeightLog w: weightLogList){
@@ -104,6 +104,15 @@ public class WeightLogServiceImpl implements WeightLogService{
 			}
 		}
 		return weightLogOfUser;
+	}
+
+	@Override
+	public WeightLog findWeightLog(Long id) throws WeightLogException{
+		WeightLog weightLog= weightLogDAO.findById(id).orElse(null);
+		if(weightLog==null)
+			throw new WeightLogException("Weight log with id "+id+" not found");
+		else
+			return weightLog;
 	}
 }
 
