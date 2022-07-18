@@ -44,10 +44,6 @@ public class NutritionPlan {
 	 */
 	@Column(name="price", nullable = false)
 	private Long price;
-	
-	@OneToOne()
-	@JoinColumn(name="user_id")
-	private User user;
 
 	public NutritionPlan()
 	{
@@ -111,14 +107,6 @@ public class NutritionPlan {
 	}
 	
 	
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	@Override
 	public String toString() {
