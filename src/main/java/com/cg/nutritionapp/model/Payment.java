@@ -31,8 +31,8 @@ public class Payment implements Serializable{
 	 * never be negative
 	 * In case if user enter negative payment, he should throw with PaymentException
 	 */
-	@Column(name="discount")
-	private Double discount;
+	// @Column(name="discount")
+	// private Double discount;
 	/**
 	 * This field represents Date of payment
 	 */
@@ -66,11 +66,11 @@ public class Payment implements Serializable{
 		
 	}
 
-	public Payment(Double payment, Double discount, LocalDate created_At, LocalDate updated_At,
+	public Payment(Double payment,/*  Double discount,*/ LocalDate created_At, LocalDate updated_At,
 			long planId) {
 		super();
 		this.payment = payment;
-		this.discount = discount;
+		// this.discount = discount;
 		this.created_At = created_At;
 		this.updated_At = updated_At;
 		
@@ -86,9 +86,9 @@ public class Payment implements Serializable{
 		return payment;
 	}
 
-	public Double getDiscount() {
-		return discount;
-	}
+	// public Double getDiscount() {
+	// 	return discount;
+	// }
 
 	public LocalDate getCreated_At() {
 		return created_At;
@@ -114,9 +114,9 @@ public class Payment implements Serializable{
 		this.payment = payment;
 	}
 
-	public void setDiscount(Double discount) {
-		this.discount = discount;
-	}
+	// public void setDiscount(Double discount) {
+	// 	this.discount = discount;
+	// }
 
 	public void setCreated_At(LocalDate created_At) {
 		this.created_At = created_At;
@@ -145,7 +145,7 @@ public class Payment implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Payment [payment=" + payment + ", discount=" + discount + ", created_At=" + created_At + ", updated_At="
+		return "Payment [payment=" + payment + /*", discount=" + discount + */", created_At=" + created_At + ", updated_At="
 				+ updated_At +", planId=" + planId + "]";
 	}
 	

@@ -18,7 +18,7 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public Payment pay(Payment payment){
 		// TODO Auto-generated method stub
-		if(payment.getPayment()==null || payment.getDiscount()==null || payment.getCreated_At()==null || payment.getUpdated_At()==null || payment.getUser()==null) {
+		if(payment.getPayment()==null || /*payment.getDiscount()==null ||*/ payment.getCreated_At()==null || payment.getUpdated_At()==null || payment.getUser()==null) {
 			throw new PaymentException("Give all Details for model to be created");
 		}
 		if(payment.getCreated_At().compareTo(payment.getUpdated_At())==0) {
@@ -47,25 +47,25 @@ public class PaymentServiceImpl implements PaymentService{
 
 	}
 
-	@Override
-	public void addOffer(double offerPrice) {
-		// TODO Auto-generated method stub
-		List<Payment> allPayments = paymentDAO.findAll();
-		for(Payment payment : allPayments) {
-			if(payment.getPayment()< offerPrice) {
-				throw new PaymentException("Offer Price cannot be greater than Original Price for id: "+payment.getId());
-			}
-			payment.setPayment(payment.getPayment()-offerPrice);
-			paymentDAO.save(payment);
-		}
+	// @Override
+	// public void addOffer(double offerPrice) {
+	// 	// TODO Auto-generated method stub
+	// 	List<Payment> allPayments = paymentDAO.findAll();
+	// 	for(Payment payment : allPayments) {
+	// 		if(payment.getPayment()< offerPrice) {
+	// 			throw new PaymentException("Offer Price cannot be greater than Original Price for id: "+payment.getId());
+	// 		}
+	// 		payment.setPayment(payment.getPayment()-offerPrice);
+	// 		paymentDAO.save(payment);
+	// 	}
 		
 		
-	}
+	// }
 
 	@Override
 	public Payment updatePayment(Payment payment){
 		// TODO Auto-generated method stub
-		if(payment.getId()==null || payment.getPayment()==null || payment.getDiscount()==null || payment.getCreated_At()==null || payment.getUpdated_At()==null || payment.getUser()==null) {
+		if(payment.getId()==null || payment.getPayment()==null || /*payment.getDiscount()==null ||*/ payment.getCreated_At()==null || payment.getUpdated_At()==null || payment.getUser()==null) {
 			throw new PaymentException("Give all Details for model to be Updated !!");
 		}
 		Payment existingPay = paymentDAO.findById(payment.getId()).orElse(null);
@@ -74,7 +74,7 @@ public class PaymentServiceImpl implements PaymentService{
 			throw new PaymentException("User Id not Found");
 		}else if (payment.getCreated_At().compareTo(payment.getUpdated_At()) <= 0) {
 			existingPay.setPayment(payment.getPayment());
-			existingPay.setDiscount(payment.getDiscount());
+			// existingPay.setDiscount(payment.getDiscount());
 			existingPay.setCreated_At(payment.getCreated_At());
 			existingPay.setUpdated_At(payment.getUpdated_At());
 			existingPay.setUser(payment.getUser());
