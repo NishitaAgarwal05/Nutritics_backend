@@ -34,7 +34,7 @@ public class PaymentController {
 	private static final Logger log = LoggerFactory.getLogger(PaymentController.class);
 
 	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
-	@GetMapping("/payment")
+	@GetMapping("/payment/listAllPayments")
 	ResponseEntity<List<Payment>> showAllPayments(){
 		try{
 			List<Payment> list = paymentService.showAllPayments();
