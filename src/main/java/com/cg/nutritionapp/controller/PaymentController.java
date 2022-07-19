@@ -61,7 +61,7 @@ public class PaymentController {
 	
 	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
 	@PostMapping("/payment/pay")
-	public ResponseEntity<Payment> pay(@Valid @RequestBody Payment payment){
+	public ResponseEntity<Payment> pay(@RequestBody Payment payment){
 		try {
 			Payment pay = paymentService.pay(payment);
 			log.info("Payment Log Created Successfully !!");
