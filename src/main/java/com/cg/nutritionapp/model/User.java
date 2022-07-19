@@ -87,8 +87,6 @@ public class User {
 	/**
 	 * nutritionPlan defines how the nutrition plan of the specific users is
 	 */
-	@OneToOne(mappedBy = "user")
-	private NutritionPlan nutritionPlan;
 	
 	@OneToOne(mappedBy = "user")
 	private  DietPlan dietPlan;
