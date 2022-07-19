@@ -72,19 +72,19 @@ public class PaymentController {
 		}
 		
 	}
-	@CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
-	@PutMapping("/payment")
-	public ResponseEntity<Payment> updatePayment(@RequestBody Payment payment){
-		try {
-			Payment pay = paymentService.updatePayment(payment);
-			log.info("Payment Updated Successfully !!");
-			return new ResponseEntity<>(pay,HttpStatus.OK);
-		}catch(PaymentException e) {
-			log.error("Error Found :-->"+e);
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+	// @CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","https://localhost:3000"})
+	// @PutMapping("/payment")
+	// public ResponseEntity<Payment> updatePayment(@RequestBody Payment payment){
+	// 	try {
+	// 		Payment pay = paymentService.updatePayment(payment);
+	// 		log.info("Payment Updated Successfully !!");
+	// 		return new ResponseEntity<>(pay,HttpStatus.OK);
+	// 	}catch(PaymentException e) {
+	// 		log.error("Error Found :-->"+e);
+	// 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	// 	}
 		
-	}
+	// }
 	// @CrossOrigin(origins = {"https://nutritics-frontend.herokuapp.com","http://localhost:3000"})
 	// @PostMapping("/payment/addOffer")
 	// public ResponseEntity<Void> addOffer(@RequestParam Double offerPrice){

@@ -18,14 +18,10 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public Payment pay(Payment payment){
 		// TODO Auto-generated method stub
-		if(payment.getPayment()==null || /*payment.getDiscount()==null ||*/ payment.getCreated_At()==null || payment.getUpdated_At()==null || payment.getUser()==null) {
+		if(payment.getPayment()==null || /*payment.getDiscount()==null ||*/ payment.getCreated_At()==null || /*payment.getUpdated_At()==null ||*/ payment.getUser()==null) {
 			throw new PaymentException("Give all Details for model to be created");
 		}
-		if(payment.getCreated_At().compareTo(payment.getUpdated_At())==0) {
-			payment = paymentDAO.save(payment);
-		}else {
-			throw new PaymentException("Created and Updated Date should be equal!!!!");
-		}
+		payment = paymentDAO.save(payment);
 		return payment;
 	}
 
@@ -62,28 +58,28 @@ public class PaymentServiceImpl implements PaymentService{
 		
 	// }
 
-	@Override
-	public Payment updatePayment(Payment payment){
-		// TODO Auto-generated method stub
-		if(payment.getId()==null || payment.getPayment()==null || /*payment.getDiscount()==null ||*/ payment.getCreated_At()==null || payment.getUpdated_At()==null || payment.getUser()==null) {
-			throw new PaymentException("Give all Details for model to be Updated !!");
-		}
-		Payment existingPay = paymentDAO.findById(payment.getId()).orElse(null);
-		if(existingPay == null)
-		{
-			throw new PaymentException("User Id not Found");
-		}else if (payment.getCreated_At().compareTo(payment.getUpdated_At()) <= 0) {
-			existingPay.setPayment(payment.getPayment());
-			// existingPay.setDiscount(payment.getDiscount());
-			existingPay.setCreated_At(payment.getCreated_At());
-			existingPay.setUpdated_At(payment.getUpdated_At());
-			existingPay.setUser(payment.getUser());
-			existingPay.setPlanId(payment.getPlanId());
-			return paymentDAO.save(existingPay);
-		}else {
-			throw new PaymentException("Updated Date should be after or same as Created Date!!");
-		}
+	// @Override
+	// public Payment updatePayment(Payment payment){
+	// 	// TODO Auto-generated method stub
+	// 	if(payment.getId()==null || payment.getPayment()==null || /*payment.getDiscount()==null ||*/ payment.getCreated_At()==null || payment.getUpdated_At()==null || payment.getUser()==null) {
+	// 		throw new PaymentException("Give all Details for model to be Updated !!");
+	// 	}
+	// 	Payment existingPay = paymentDAO.findById(payment.getId()).orElse(null);
+	// 	if(existingPay == null)
+	// 	{
+	// 		throw new PaymentException("User Id not Found");
+	// 	}else if (payment.getCreated_At().compareTo(payment.getUpdated_At()) <= 0) {
+	// 		existingPay.setPayment(payment.getPayment());
+	// 		// existingPay.setDiscount(payment.getDiscount());
+	// 		existingPay.setCreated_At(payment.getCreated_At());
+	// 		existingPay.setUpdated_At(payment.getUpdated_At());
+	// 		existingPay.setUser(payment.getUser());
+	// 		existingPay.setPlanId(payment.getPlanId());
+	// 		return paymentDAO.save(existingPay);
+	// 	}else {
+	// 		throw new PaymentException("Updated Date should be after or same as Created Date!!");
+	// 	}
 		
-	}
+	// }
 
 }
